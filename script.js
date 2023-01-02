@@ -1,8 +1,25 @@
 console.log('Script attached to HTML');
 
-for (let i = 0; i < 15; i++) {
-    console.log(i);
-    let sketchBoard = document.createElement('div');
-    sketchBoard.className = 'grid';
-    document.querySelector('div').appendChild(sketchBoard);
+//Variables
+const submitNumberOfGrid = document.getElementById('submitBtn');
+const gridContainer = document.getElementById('gridContainer');
+const defaultValue = 16;
+
+// submitNumberOfGrid.addEventListener('click', function () {
+//     const numOfGrid = document.querySelector('#fetchNumberOfGrid').value;
+//     console.log(numOfGrid);
+//     sketchBoard(numOfGrid);
+// });
+
+function sketchBoard(num) {
+    gridContainer.style.gridTemplateColumns = `repeat(${num}, 1fr)`;
+    gridContainer.style.gridTemplateRows = `repeat(${num}, 1fr)`;
+
+    for (let i = 0; i < num * num; i++) {
+        const createDiv = document.createElement('div');
+        createDiv.classList.add('grid-element');
+        gridContainer.appendChild(createDiv);
+    }
 }
+
+sketchBoard(16);
