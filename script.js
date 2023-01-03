@@ -1,19 +1,11 @@
-console.log('Script attached to HTML');
-
 //Variables
-const submitNumberOfGrid = document.getElementById('submitBtn');
-const gridContainer = document.getElementById('gridContainer');
 const defaultValue = 16;
+const gridContainer = document.getElementById('gridContainer');
+const pickColor = document.getElementById('pickAColor');
+const gridSize = document.getElementById('sizeOfGrid');
+const sizeNumber = document.getElementById('numberOfGridSize');
 
-submitNumberOfGrid.addEventListener('click', function () {
-    const numOfGrid = document.querySelector('#fetchNumberOfGrid').value;
-    if (numOfGrid >= 64) {
-        return;
-    } else {
-        sketchBoard(numOfGrid);
-    }
-});
-
+// displaying the sketching board
 function sketchBoard(num) {
     gridContainer.style.gridTemplateColumns = `repeat(${num}, 1fr)`;
     gridContainer.style.gridTemplateRows = `repeat(${num}, 1fr)`;
@@ -24,9 +16,40 @@ function sketchBoard(num) {
         gridContainer.appendChild(createDiv);
     }
 }
-sketchBoard(defaultValue);
 
+// painting the divs while the mouse goes through the grid container and the children elements
 gridContainer.addEventListener('mousemove', function (e) {
-    console.log(e.target, 'event happening');
+    // console.log(e.target, 'event happening');
     e.target.style.backgroundColor = 'steelblue';
 });
+
+// change color from the
+function changeColor() {}
+
+sketchBoard(defaultValue);
+
+// Changing label of the number of grid
+function changeSizeNumber(size) {
+    sizeNumber.innerHTML = `${size} x ${size}`;
+}
+
+// Update size the grid sketch
+function updateGridSize() {
+    const returnGridSizeValue = gridSize.value;
+    sketchBoard(returnGridSizeValue);
+    changeSizeNumber(returnGridSizeValue);
+    setupContainer(returnGridSizeValue);
+}
+// Erase the element painted on the canvas
+function eraseGridCanvas() {
+    gridContainer.innerHTML = '';
+}
+
+// Setup container
+function setupContainer(value) {
+    eraseGridCanvas();
+    sketchBoard(value);
+}
+
+// Changing the size of the grid canvas + the label that is represented by the range input
+gridSize.addEventListener('click', updateGridSize);
