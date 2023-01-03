@@ -8,13 +8,23 @@ const sizeNumber = document.getElementById('numberOfGridSize');
 const eraseBtn = document.getElementById('eraseBtn');
 const clearBtn = document.getElementById('clearBtn');
 const randomColorBtn = document.getElementById('randomBtn');
+const rainbowColorBtn = document.getElementById('rainbowBtn');
 let currentColorValue = '';
+let currentMode = '';
 
 // Initial function
-
 function init() {
     sketchBoard(defaultValue);
+    setCurrentColor(defaultColor);
 }
+
+// set current color
+function setCurrentColor(value) {
+    currentColorValue = value;
+}
+
+// set current mode
+function setCurrentMode(mode) {}
 
 // displaying the sketching board
 function sketchBoard(num) {
@@ -68,6 +78,9 @@ pickColor.addEventListener('input', function (e) {
 
 // change color
 function changeColor(e) {
+    if (currentMode == 'eraser') {
+        e.target.style.backgroundColor = '#ffffff';
+    }
     e.target.style.backgroundColor = currentColorValue;
 }
 
@@ -98,15 +111,30 @@ function randomColor() {
         // console.log(hexValues[index]);
         currentColorValue = hex += `${hexValues[index]}`;
     }
+    currentMode = 'random';
+    console.log(currentMode);
+    console.log(currentColorValue);
 }
 
 // rainbow button
 
 function rainbowColor() {
-    gridContainer.style.backgroundColor = `hsl(${
-        Math.random() * 360
-    } 100%, 50%)`;
+    currentColorValue = `hsl(${Math.random() * 360} 100%, 50%)`;
+    currentMode = 'rainbow';
+    console.log(currentColorValue);
+    console.log(currentMode);
 }
+
+// erase button
+
+function eraserColor() {
+    currentColorValue = '#ffffff';
+    currentMode = 'eraser';
+}
+
+eraseBtn.addEventListener('click', eraserColor);
+
+rainbowColorBtn.addEventListener('click', rainbowColor);
 
 randomColorBtn.addEventListener('click', randomColor);
 
