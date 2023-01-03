@@ -7,6 +7,7 @@ const gridSize = document.getElementById('sizeOfGrid');
 const sizeNumber = document.getElementById('numberOfGridSize');
 const eraseBtn = document.getElementById('eraseBtn');
 const clearBtn = document.getElementById('clearBtn');
+const randomColorBtn = document.getElementById('randomBtn');
 let currentColorValue = '';
 
 // Initial function
@@ -69,5 +70,44 @@ pickColor.addEventListener('input', function (e) {
 function changeColor(e) {
     e.target.style.backgroundColor = currentColorValue;
 }
+
+// random color button
+function randomColor() {
+    let hex = '#';
+    let hexValues = [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        'A',
+        'B',
+        'C',
+        'D',
+        'E',
+        'F',
+    ];
+    for (let i = 0; i < 6; i++) {
+        // console.log(hexValues[i]);
+        const index = Math.floor(Math.random() * hexValues.length);
+        // console.log(hexValues[index]);
+        currentColorValue = hex += `${hexValues[index]}`;
+    }
+}
+
+// rainbow button
+
+function rainbowColor() {
+    gridContainer.style.backgroundColor = `hsl(${
+        Math.random() * 360
+    } 100%, 50%)`;
+}
+
+randomColorBtn.addEventListener('click', randomColor);
 
 init();
