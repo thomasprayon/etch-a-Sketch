@@ -5,11 +5,14 @@ const submitNumberOfGrid = document.getElementById('submitBtn');
 const gridContainer = document.getElementById('gridContainer');
 const defaultValue = 16;
 
-// submitNumberOfGrid.addEventListener('click', function () {
-//     const numOfGrid = document.querySelector('#fetchNumberOfGrid').value;
-//     console.log(numOfGrid);
-//     sketchBoard(numOfGrid);
-// });
+submitNumberOfGrid.addEventListener('click', function () {
+    const numOfGrid = document.querySelector('#fetchNumberOfGrid').value;
+    if (numOfGrid >= 64) {
+        return;
+    } else {
+        sketchBoard(numOfGrid);
+    }
+});
 
 function sketchBoard(num) {
     gridContainer.style.gridTemplateColumns = `repeat(${num}, 1fr)`;
@@ -21,5 +24,9 @@ function sketchBoard(num) {
         gridContainer.appendChild(createDiv);
     }
 }
+sketchBoard(defaultValue);
 
-sketchBoard(16);
+gridContainer.addEventListener('mousemove', function (e) {
+    console.log(e.target, 'event happening');
+    e.target.style.backgroundColor = 'steelblue';
+});
