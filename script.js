@@ -1,9 +1,18 @@
 //Variables
 const defaultValue = 16;
+const defaultColor = `rgb(0,0,0)`;
 const gridContainer = document.getElementById('gridContainer');
 const pickColor = document.getElementById('pickAColor');
 const gridSize = document.getElementById('sizeOfGrid');
 const sizeNumber = document.getElementById('numberOfGridSize');
+const eraseBtn = document.getElementById('eraseBtn');
+const clearBtn = document.getElementById('clearBtn');
+
+// Initial function
+
+function init() {
+    sketchBoard(defaultValue);
+}
 
 // displaying the sketching board
 function sketchBoard(num) {
@@ -17,16 +26,8 @@ function sketchBoard(num) {
     }
 }
 
-// painting the divs while the mouse goes through the grid container and the children elements
-gridContainer.addEventListener('mousemove', function (e) {
-    // console.log(e.target, 'event happening');
-    e.target.style.backgroundColor = 'steelblue';
-});
-
-// change color from the
+// change color from the color picker
 function changeColor() {}
-
-sketchBoard(defaultValue);
 
 // Changing label of the number of grid
 function changeSizeNumber(size) {
@@ -40,6 +41,7 @@ function updateGridSize() {
     changeSizeNumber(returnGridSizeValue);
     setupContainer(returnGridSizeValue);
 }
+
 // Erase the element painted on the canvas
 function eraseGridCanvas() {
     gridContainer.innerHTML = '';
@@ -53,3 +55,14 @@ function setupContainer(value) {
 
 // Changing the size of the grid canvas + the label that is represented by the range input
 gridSize.addEventListener('click', updateGridSize);
+
+// painting the divs while the mouse goes through the grid container and the children elements
+gridContainer.addEventListener('mousemove', function (e) {
+    console.log(e, 'event happening');
+    e.target.style.backgroundColor = 'steelblue';
+});
+
+// clear what is painted in the grid canvas
+clearBtn.addEventListener('click', updateGridSize);
+
+init();
