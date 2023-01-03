@@ -20,8 +20,11 @@
                     max="64"
                 />
                 <input type="color" name="color" id="pickAColor" />
-                <button id="eraseBtn">Erase</button>
-                <button id="clearBtn">Clear</button>
+                <button class="btn btn-erase" id="eraseBtn">Erase</button>
+                <button class="btn btn-clear" id="clearBtn">Clear</button>
+                <button aria-checked="btn btn-random" id="randomBtn">
+                    Random Color
+                </button>
             </section>
             <div class="grid-container" id="gridContainer"></div>
         </main>
